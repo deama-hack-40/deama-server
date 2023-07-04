@@ -28,8 +28,9 @@ public class Emission {
     private Category category;
 
     @Builder
-    public Emission(String title, String content) {
+    public Emission(String title, String content, Category category) {
         this.title = title;
         this.content = content;
+        this.category = category;
     }
 }

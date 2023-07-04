@@ -1,4 +1,4 @@
-package com.example.deamaserver.controller.dto;
+package com.example.deamaserver.controller.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

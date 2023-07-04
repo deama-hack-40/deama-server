@@ -1,17 +1,16 @@
 package com.example.deamaserver.controller;
 
-import com.example.deamaserver.controller.dto.ListResponse;
-import com.example.deamaserver.controller.dto.Response;
+import com.example.deamaserver.controller.dto.request.EmissionRequest;
+import com.example.deamaserver.controller.dto.response.ListResponse;
+import com.example.deamaserver.controller.dto.response.Response;
 import com.example.deamaserver.entity.types.Category;
-import com.example.deamaserver.controller.dto.CategoryAndArrayResponse;
+import com.example.deamaserver.controller.dto.response.CategoryAndArrayResponse;
 import com.example.deamaserver.service.EmissionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -37,5 +36,10 @@ public class EmissionController {
     @GetMapping("/{category}")
     public CategoryAndArrayResponse findByCategory(@PathVariable Category category) {
         return emissionService.findByCategory(category);
+    }
+
+    @PostMapping("/save")
+    public void saveEmission(@RequestBody @Valid EmissionRequest request) {
+        emissionService.saveEmission(request);
     }
 }

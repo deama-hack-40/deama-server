@@ -1,12 +1,13 @@
 package com.example.deamaserver.service;
 
-import com.example.deamaserver.controller.dto.ListResponse;
-import com.example.deamaserver.controller.dto.Response;
+import com.example.deamaserver.controller.dto.request.EmissionRequest;
+import com.example.deamaserver.controller.dto.response.ListResponse;
+import com.example.deamaserver.controller.dto.response.Response;
 import com.example.deamaserver.entity.Emission;
 import com.example.deamaserver.entity.EmissionRepository;
 import com.example.deamaserver.entity.types.Category;
-import com.example.deamaserver.controller.dto.CategoryAndArrayResponse;
-import com.example.deamaserver.controller.dto.EmissionResponse;
+import com.example.deamaserver.controller.dto.response.CategoryAndArrayResponse;
+import com.example.deamaserver.controller.dto.response.EmissionResponse;
 import com.example.deamaserver.exception.EmissionNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -61,5 +62,9 @@ public class EmissionService {
         return CategoryAndArrayResponse.builder()
                 .category(category.name())
                 .emissionList(emissions).build();
+    }
+
+    public void saveEmission(EmissionRequest request) {
+        emissionRepository.save(request.toEmission());
     }
 }
