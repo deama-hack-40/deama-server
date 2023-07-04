@@ -20,13 +20,13 @@ public class EmissionController {
     private final EmissionService emissionService;
 
     @GetMapping("/explain/{id}")
-    public Response getexplain (@PathVariable Long id) {
+    public Response getExplain(@PathVariable Long id) {
         return emissionService.getById(id);
     }
 
-    @GetMapping("list")
+    @GetMapping("/list")
     public List<ListResponse> getAllPost (ListResponse response) {
-        return emissionService.getAllpost(response);
+        return emissionService.getAllPost(response);
     }
 
     @GetMapping("/photo")

@@ -34,7 +34,7 @@ public class EmissionService {
     }
 
     @Transactional(readOnly = true)
-    public List<ListResponse> getAllpost(ListResponse response) {
+    public List<ListResponse> getAllPost(ListResponse response) {
         List<Emission> emissions = emissionRepository.findAll();
         return emissions.stream().map(
                 e-> ListResponse.builder()
