@@ -7,13 +7,14 @@ import lombok.Getter;
 @Getter
 public class Response {
 
-    private Long id;
-    private String title;
-    private String content;
-    private Category category;
+    private final Long id;
+    private final String title;
+    private final String content;
+    private final Category category;
 
     @Builder
-    Response(String title, String content, String category){
+    public Response(Long id, String title, String content, String category){
+        this.id = id;
         this.title = title;
         this.content = content;
         this.category = Category.valueOf(category);

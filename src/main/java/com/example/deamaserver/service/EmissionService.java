@@ -7,6 +7,7 @@ import com.example.deamaserver.entity.EmissionRepository;
 import com.example.deamaserver.entity.types.Category;
 import com.example.deamaserver.controller.dto.CategoryAndArrayResponse;
 import com.example.deamaserver.controller.dto.EmissionResponse;
+import com.example.deamaserver.exception.EmissionNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,8 +26,9 @@ public class EmissionService {
 
     @Transactional(readOnly = true)
     public Response getById(Long id) {
-        Emission emission = emissionRepository.findById(id).orElseThrow();
+        Emission emission = emissionRepository.findById(id).orElseThrow(()-> EmissionNotFoundException.EXCEPTION);
         return Response.builder()
+                .id(emission.getId())
                 .title(emission.getTitle())
                 .content(emission.getContent())
                 .category(String.valueOf(emission.getCategory())).
@@ -44,6 +46,7 @@ public class EmissionService {
         ).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public CategoryAndArrayResponse findByPhoto(MultipartFile file) {
         Category category = Category.PAPER;
         List<EmissionResponse> emissions = emissionRepository.getCategory(category);
@@ -52,6 +55,7 @@ public class EmissionService {
                 .emissionList(emissions).build();
     }
 
+    @Transactional(readOnly = true)
     public CategoryAndArrayResponse findByCategory(Category category) {
         List<EmissionResponse> emissions = emissionRepository.getCategory(category);
         return CategoryAndArrayResponse.builder()
