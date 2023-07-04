@@ -1,4 +1,4 @@
-package com.example.deamaserver.presentation.woonildto;
+package com.example.deamaserver.controller.dto;
 
 import com.example.deamaserver.entity.Emission;
 import lombok.Getter;

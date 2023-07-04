@@ -1,4 +1,4 @@
-package com.example.deamaserver.presentation.woonildto;
+package com.example.deamaserver.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
