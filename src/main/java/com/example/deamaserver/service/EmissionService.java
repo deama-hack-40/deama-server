@@ -9,6 +9,7 @@ import com.example.deamaserver.entity.types.Category;
 import com.example.deamaserver.controller.dto.response.CategoryAndArrayResponse;
 import com.example.deamaserver.controller.dto.response.EmissionResponse;
 import com.example.deamaserver.exception.EmissionNotFoundException;
+import com.example.deamaserver.util.ApiUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,8 @@ import java.util.stream.Collectors;
 public class EmissionService {
 
     private final EmissionRepository emissionRepository;
+
+    private final ApiUtils apiUtils;
 
 
     @Transactional(readOnly = true)
@@ -49,7 +52,8 @@ public class EmissionService {
 
     @Transactional(readOnly = true)
     public CategoryAndArrayResponse findByPhoto(MultipartFile file) {
-        Category category = Category.PAPER;
+        String categoryString = apiUtils.requestApi(file);
+        Category category = Category.valueOf(categoryString);
         List<EmissionResponse> emissions = emissionRepository.getCategory(category);
         return CategoryAndArrayResponse.builder()
                 .category(category.name())

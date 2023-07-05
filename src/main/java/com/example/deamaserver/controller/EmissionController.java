@@ -6,6 +6,7 @@ import com.example.deamaserver.controller.dto.response.Response;
 import com.example.deamaserver.entity.types.Category;
 import com.example.deamaserver.controller.dto.response.CategoryAndArrayResponse;
 import com.example.deamaserver.service.EmissionService;
+import com.example.deamaserver.util.s3.S3Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +17,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 public class EmissionController {
+
     private final EmissionService emissionService;
+
+    private final S3Util s3Util;
 
     @GetMapping("/explain/{id}")
     public Response getExplain(@PathVariable Long id) {

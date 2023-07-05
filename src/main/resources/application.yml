@@ -12,8 +12,23 @@ spring:
     generate-ddl: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-  redis:
-    host: ${REDIS_HOST}
-    port: ${REDIS_PORT}
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 200MB
+      max-request-size: 200MB
+cloud:
+  aws:
+    s3:
+      bucket: ${BUCKET_NAME}
+      url: ${S3_URL}
+    credentials:
+      access-key : ${ACCESS_KEY}
+      secret-key : ${SECRET_KEY}
+    region:
+      static: ${REGION}
+      auto: false
+    stack:
+      false
 api:
   ai-server: ${AI_SERVER_ADDRESS}
